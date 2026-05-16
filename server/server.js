@@ -11,6 +11,7 @@ const connectDB = require("./config/db");
 //Routes
 const authRoutes = require("./routes/authRoutes");
 const estimateRoutes = require("./routes/estimateRoutes");
+const appointmentRoutes = require("./routes/appointmentRoutes");
 
 //Connect to MongoDB
 connectDB();
@@ -24,6 +25,7 @@ app.use(express.json());
 //Route mounting
 app.use("/api/auth", authRoutes);
 app.use("/api/estimates", estimateRoutes);
+app.use("/api/appointments", appointmentRoutes);
 
 //Root route
 app.get("/", (req, res) => {
