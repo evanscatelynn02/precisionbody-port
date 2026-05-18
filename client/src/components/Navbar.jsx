@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 function Navbar() {
+  const { user } = useContext(AuthContext);
+
   return (
     <nav className="bg-black text-white p-4">
       <div className="max-w-6xl mx-auto flex justify-between">
@@ -15,6 +19,15 @@ function Navbar() {
           <Link to="/dashboard">Dashboard</Link>
           <Link to="/booking">Booking</Link>
           <Link to="/estimate">Estimate</Link>
+
+          {
+           user?.role === "admin" && (
+           <Link to="/admin">
+              Admin
+              </Link>
+           )
+          }
+
         </div>
       </div>
     </nav>

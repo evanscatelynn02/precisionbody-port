@@ -1,10 +1,10 @@
 import { useState, useContext } from "react";
-
 import API from "../services/api";
-
 import { AuthContext } from "../context/AuthContext";
 
 function EstimatePage() {
+
+  const [loading, setLoading] = useState(false);
 
   const { user } = useContext(AuthContext);
 
@@ -15,6 +15,8 @@ function EstimatePage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setLoading(true);
 
     try {
 
@@ -38,6 +40,8 @@ function EstimatePage() {
       console.error(error);
 
       alert("Estimate failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -64,10 +68,13 @@ function EstimatePage() {
         />
 
         <button
-          className="bg-black text-white px-6 py-3 rounded"
-        >
-          Generate Estimate
-        </button>
+         disabled={loading}
+          className={`w-full p-3 rounded text-white ${
+           loading ? "bg-gray-500" : "bg-black"
+        }`}
+      >
+        {loading ? "Loading..." : "Generate Estimate"}
+      </button>
 
       </form>
 

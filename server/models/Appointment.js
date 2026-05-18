@@ -25,6 +25,12 @@ const appointmentSchema = new mongoose.Schema(
       default: "scheduled",
     },
 
+    repairStatus: {
+      type: String,
+      enum: ["Pending", "Approved", "In Progress", "Completed"],
+      default: "Pending",
+    },
+
     notes: String,
   },
   {

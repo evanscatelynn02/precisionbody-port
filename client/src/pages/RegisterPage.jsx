@@ -3,6 +3,8 @@ import API from "../services/api";
 
 function RegisterPage() {
 
+  const [loading, setLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -21,6 +23,8 @@ function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setLoading(true);
+
     try {
 
       const response = await API.post(
@@ -37,6 +41,8 @@ function RegisterPage() {
       console.error(error);
 
       alert("Registration failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -90,10 +96,14 @@ function RegisterPage() {
         />
 
         <button
-          className="w-full bg-black text-white p-3 rounded"
-        >
-          Register
-        </button>
+         disabled={loading}
+          className={`w-full p-3 rounded text-white ${
+           loading ? "bg-gray-500" : "bg-black"
+        }`}
+      >
+        {loading ? "Loading..." : "Register"}
+      </button>
+
 
       </form>
     </div>

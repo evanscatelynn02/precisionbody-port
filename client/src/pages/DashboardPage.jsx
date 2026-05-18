@@ -26,6 +26,31 @@ function DashboardPage() {
           and repair updates here.
         </p>
 
+        <div className="bg-white p-6 rounded-1g shadow mt-8">
+
+          <h2 className="text-2xl font-bold mb-4">
+            Repair Status
+          </h2>
+
+          <div className="border rounded p-4">
+
+            <p className="font-semibold">
+              Vehicle:
+              {" "}
+              Honda Civic
+            </p>
+
+            <p>
+              Status:
+              {" "}
+              <span className="text-blue-600">
+              </span>
+            </p>
+
+          </div>
+          
+        </div>
+
       </div>
 
     </div>

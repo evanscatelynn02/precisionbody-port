@@ -9,7 +9,17 @@ import DashboardPage from "./pages/DashboardPage";
 import BookingPage from "./pages/BookingPage";
 import EstimatePage from "./pages/EstimatePage";
 
+import { useContext } from "react";
+
+import { AuthContext } from "./context/AuthContext";
+
+import AdminRoute from "./components/AdminRoute";
+
+import AdminDashboardPage from "./pages/AdminDashboardPage";
+
 function App() {
+  const { user } = useContext(AuthContext);
+
   return (
     <div className="min-h-screen bg-gray-100">
 
@@ -27,6 +37,16 @@ function App() {
         <Route path="/booking" element={<BookingPage />} />
 
         <Route path="/estimate" element={<EstimatePage />} />
+
+        <Route
+         path="/admin"
+          element={
+            <AdminRoute user={user}>
+              <AdminDashboardPage />
+           </AdminRoute>
+          }
+        />
+        
       </Routes>
 
     </div>

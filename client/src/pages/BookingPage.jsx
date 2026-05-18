@@ -1,10 +1,10 @@
 import { useState, useContext } from "react";
-
 import API from "../services/api";
-
 import { AuthContext } from "../context/AuthContext";
 
 function BookingPage() {
+
+  const [loading, setLoading] = useState(false);
 
   const { user } = useContext(AuthContext);
 
@@ -15,6 +15,8 @@ function BookingPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setLoading(true);
 
     try {
 
@@ -39,6 +41,8 @@ function BookingPage() {
       console.error(error);
 
       alert("Booking failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -74,10 +78,13 @@ function BookingPage() {
         />
 
         <button
-          className="bg-black text-white px-6 py-3 rounded"
-        >
-          Schedule Appointment
-        </button>
+         disabled={loading}
+          className={`w-full p-3 rounded text-white ${
+           loading ? "bg-gray-500" : "bg-black"
+        }`}
+      >
+        {loading ? "Loading..." : "Book Appointment"}
+      </button>
 
       </form>
 

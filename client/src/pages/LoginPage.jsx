@@ -1,9 +1,6 @@
 import { useState, useContext } from "react";
-
 import { useNavigate } from "react-router-dom";
-
 import API from "../services/api";
-
 import { AuthContext } from "../context/AuthContext";
 
 function LoginPage() {
@@ -11,6 +8,8 @@ function LoginPage() {
   const navigate = useNavigate();
 
   const { login } = useContext(AuthContext);
+
+  const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -26,6 +25,8 @@ function LoginPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setLoading(true);
 
     try {
 
@@ -47,6 +48,8 @@ function LoginPage() {
       console.error(error);
 
       alert("Login failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -76,10 +79,13 @@ function LoginPage() {
         />
 
         <button
-          className="w-full bg-black text-white p-3 rounded"
-        >
-          Login
-        </button>
+         disabled={loading}
+          className={`w-full p-3 rounded text-white ${
+           loading ? "bg-gray-500" : "bg-black"
+        }`}
+      >
+        {loading ? "Loading..." : "Login"}
+      </button>
 
       </form>
     </div>
