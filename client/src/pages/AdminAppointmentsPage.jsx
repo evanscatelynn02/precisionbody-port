@@ -9,7 +9,7 @@ function AdminAppointmentsPage() {
 
         <div className="bg-white shadow rounded-lg p-4 md:p-6 overflow-x-auto">
 
-          <table className="w-full min-w-[500px]">
+          <table className="w-full min-w-125">
             <thead>
               <tr className="border-b">
                 <th className="text-left py-3">Customer</th>
