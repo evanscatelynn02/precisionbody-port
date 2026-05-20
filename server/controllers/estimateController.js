@@ -61,6 +61,10 @@ Estimated Timeline:
 // GET USER ESTIMATES
 const getUserEstimates = async (req, res) => {
   try {
+    
+    console.log("REQ USER:", req.user);
+    console.log("REQ USER ID:", req.user._id);
+
     const estimates = await Estimate.find({
       userId: req.user._id,
     }).sort({ createdAt: -1 });
