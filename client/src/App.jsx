@@ -16,6 +16,7 @@ import { AuthContext } from "./context/AuthContext";
 import AdminRoute from "./components/AdminRoute";
 
 import AdminDashboardPage from "./pages/AdminDashboardPage";
+import AdminAppointmentsPage from "./pages/AdminAppointmentsPage";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -38,15 +39,26 @@ function App() {
 
         <Route path="/estimate" element={<EstimatePage />} />
 
+        {/* Admin Dashboard */}
         <Route
-         path="/admin"
+          path="/admin"
           element={
             <AdminRoute user={user}>
               <AdminDashboardPage />
-           </AdminRoute>
+            </AdminRoute>
           }
         />
-        
+
+        {/* Admin Appointments Page */}
+        <Route
+          path="/admin/appointments"
+          element={
+            <AdminRoute user={user}>
+              <AdminAppointmentsPage />
+            </AdminRoute>
+          }
+        />
+
       </Routes>
 
     </div>

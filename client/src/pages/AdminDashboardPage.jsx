@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 function AdminDashboardPage() {
@@ -12,25 +13,36 @@ function AdminDashboardPage() {
           Admin Dashboard
         </h1>
 
+        {/* ⭐ Admin Dashboard Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
 
-          <div className="bg-white shadow rounded-lg p-4 md:p-6">
-            <h2 className="text-xl md:text-2xl font-bold mb-2">Appointments</h2>
-            <p>Manage incoming bookings</p>
-          </div>
+          {/* Appointments Card */}
+          <Link to="/admin/appointments">
+            <div className="bg-white shadow rounded-lg p-4 md:p-6 hover:shadow-lg transition cursor-pointer">
+              <h2 className="text-xl md:text-2xl font-bold mb-2">Appointments</h2>
+              <p>Manage incoming bookings</p>
+            </div>
+          </Link>
 
-          <div className="bg-white shadow rounded-lg p-4 md:p-6">
-            <h2 className="text-xl md:text-2xl font-bold mb-2">Estimates</h2>
-            <p>Review AI repair estimates</p>
-          </div>
+          {/* Estimates Card */}
+          <Link to="/admin/estimates">
+            <div className="bg-white shadow rounded-lg p-4 md:p-6 hover:shadow-lg transition cursor-pointer">
+              <h2 className="text-xl md:text-2xl font-bold mb-2">Estimates</h2>
+              <p>Review AI repair estimates</p>
+            </div>
+          </Link>
 
-          <div className="bg-white shadow rounded-lg p-4 md:p-6">
-            <h2 className="text-xl md:text-2xl font-bold mb-2">Customers</h2>
-            <p>Manage registered users</p>
-          </div>
+          {/* Customers Card */}
+          <Link to="/admin/customers">
+            <div className="bg-white shadow rounded-lg p-4 md:p-6 hover:shadow-lg transition cursor-pointer">
+              <h2 className="text-xl md:text-2xl font-bold mb-2">Customers</h2>
+              <p>Manage registered users</p>
+            </div>
+          </Link>
 
         </div>
 
+        {/* Logged In Admin Info */}
         <div className="mt-10 bg-white shadow rounded-lg p-4 md:p-6">
           <h2 className="text-xl md:text-2xl font-bold mb-4">Logged In Admin</h2>
 
@@ -43,9 +55,7 @@ function AdminDashboardPage() {
       </div>
 
       <footer className="bg-black text-white text-center py-6 mt-20">
-        <p>
-            PrecisionBody Port © 2026
-        </p>
+        <p>PrecisionBody Port © 2026</p>
       </footer>
 
     </div>
