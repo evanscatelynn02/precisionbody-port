@@ -7,8 +7,12 @@ function DashboardPage() {
   const { user } = useContext(AuthContext);
 
   const [appointments, setAppointments] = useState([]);
+  const [estimates, setEstimates] = useState([]);
 
   useEffect(() => {
+
+    if (!user) return;
+
     const fetchAppointments = async () => {
       try {
         const response = await API.get("/appointments", {
@@ -23,8 +27,25 @@ function DashboardPage() {
       }
     };
 
+    const fetchEstimates = async () => {
+      try {
+        const response = await API.get("/estimates", {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
+
+        console.log(response.data);
+
+        setEstimates(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
     fetchAppointments();
-  }, [user.token]);
+    fetchEstimates();
+  }, [user]);
 
   return (
     <div className="min-h-screen bg-gray-300 flex flex-col justify-between">
@@ -33,7 +54,7 @@ function DashboardPage() {
         <h1 className="text-3xl md:text-4xl font-bold mb-6">Dashboard</h1>
 
         <div className="bg-white p-4 md:p-6 rounded-lg shadow">
-          <p className="text-lg">Welcome, {user?.name}</p>
+          <p className="text-lg">Welcome, {" "} {user?.firstName}</p>
 
           <p className="text-gray-600 mt-2">
             Manage estimates, bookings, and repair updates here.
@@ -42,13 +63,40 @@ function DashboardPage() {
           {/* ⭐ Dashboard Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mt-8">
 
-            {/* Estimates Card */}
+            {/* ⭐ Updated Estimates Card */}
             <Link to="/estimates">
               <div className="bg-white shadow rounded-lg p-4 md:p-6 hover:shadow-lg transition cursor-pointer">
                 <h2 className="text-lg md:text-xl font-bold">Estimates</h2>
-                <p className="text-gray-500 mt-2">
-                  View AI repair estimates
-                </p>
+                <p className="text-gray-500 mt-2">View AI repair estimates</p>
+
+                {/* Dynamic Estimates */}
+                <div className="mt-4">
+                  {estimates.length === 0 ? (
+                    <p>No estimates found.</p>
+                  ) : (
+                    estimates.map((estimate) => (
+                      <div
+                        key={estimate._id}
+                        className="border rounded p-3 mb-3"
+                      >
+                        <p className="font-semibold">
+                          {estimate.damageDescription}
+                        </p>
+
+                        <p>
+                          Estimated Cost: ${estimate.aiEstimateAmount}
+                        </p>
+
+                        <p>
+                          Status:{" "}
+                          <span className="text-green-600">
+                            {estimate.status}
+                          </span>
+                        </p>
+                      </div>
+                    ))
+                  )}
+                </div>
               </div>
             </Link>
 
