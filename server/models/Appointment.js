@@ -19,15 +19,10 @@ const appointmentSchema = new mongoose.Schema(
 
     appointmentDate: Date,
 
+    // ⭐ Unified status field
     status: {
       type: String,
-      enum: ["scheduled", "in_progress", "completed", "cancelled"],
-      default: "scheduled",
-    },
-
-    repairStatus: {
-      type: String,
-      enum: ["Pending", "Approved", "In Progress", "Completed"],
+      enum: ["Pending", "Approved", "In Progress", "Completed", "Cancelled"],
       default: "Pending",
     },
 

@@ -12,6 +12,9 @@ const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const estimateRoutes = require("./routes/estimateRoutes");
 const appointmentRoutes = require("./routes/appointmentRoutes");
+const vehicleRoutes = require("./routes/vehicleRoutes");
+const adminRoutes = require("./routes/adminRoutes");
+console.log(adminRoutes);
 
 //Connect to MongoDB
 connectDB();
@@ -26,6 +29,9 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/estimates", estimateRoutes);
 app.use("/api/appointments", appointmentRoutes);
+app.use("/api/vehicles", vehicleRoutes);
+app.use("/api/admin", adminRoutes);
+
 
 //Root route
 app.get("/", (req, res) => {

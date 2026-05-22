@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 
@@ -8,6 +8,9 @@ import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
 import BookingPage from "./pages/BookingPage";
 import EstimatePage from "./pages/EstimatePage";
+import VehiclesPage from "./pages/VehiclesPage";
+import AppointmentsPage from "./pages/AppointmentsPage";
+import RepairStatusPage from "./pages/RepairStatusPage";
 
 import { useContext } from "react";
 
@@ -17,6 +20,8 @@ import AdminRoute from "./components/AdminRoute";
 
 import AdminDashboardPage from "./pages/AdminDashboardPage";
 import AdminAppointmentsPage from "./pages/AdminAppointmentsPage";
+import AdminEstimatesPage from "./pages/AdminEstimatesPage";
+import AdminCustomersPage from "./pages/AdminCustomersPage";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -33,11 +38,21 @@ function App() {
 
         <Route path="/register" element={<RegisterPage />} />
 
-        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/dashboard" element={
+          user?.role === "admin"
+          ? <Navigate to="/admin" replace />
+          : <DashboardPage />
+        } />
 
         <Route path="/booking" element={<BookingPage />} />
 
         <Route path="/estimate" element={<EstimatePage />} />
+
+        <Route path="/vehicles" element={<VehiclesPage />} />
+
+        <Route path="/appointments" element={<AppointmentsPage />} />
+
+        <Route path="/repair-status" element={<RepairStatusPage />} />
 
         {/* Admin Dashboard */}
         <Route
@@ -55,6 +70,26 @@ function App() {
           element={
             <AdminRoute user={user}>
               <AdminAppointmentsPage />
+            </AdminRoute>
+          }
+        />
+
+        {/* Admin Estimates Page */}
+        <Route
+          path="/admin/estimates"
+          element={
+            <AdminRoute user={user}>
+              <AdminEstimatesPage />
+            </AdminRoute>
+          }
+        />
+
+        {/* Admin Customers Page */}
+        <Route
+          path="/admin/customers"
+          element={
+            <AdminRoute user={user}>
+              <AdminCustomersPage />
             </AdminRoute>
           }
         />

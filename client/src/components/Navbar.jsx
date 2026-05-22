@@ -32,15 +32,25 @@ function Navbar() {
 
           {user && (
             <>
-              <Link to="/dashboard">Dashboard</Link>
-              <Link to="/booking">Booking</Link>
-              <Link to="/estimate">Estimate</Link>
-
-              {user?.role === "admin" && (
-                <Link to="/admin">Admin</Link>
+              {/* Show Dashboard for users, Admin Dashboard for admins */}
+              {user?.role === "admin" ? (
+                <Link to="/admin">Admin Dashboard</Link>
+              ) : (
+                <Link to="/dashboard">Dashboard</Link>
               )}
 
-              <button onClick={handleLogout} className="text-red-400">
+              {/* User‑only links */}
+              {user?.role !== "admin" && (
+                <>
+                  <Link to="/booking">Booking</Link>
+                  <Link to="/estimate">Estimate</Link>
+                </>
+              )}
+
+              <button
+                onClick={handleLogout}
+                className="text-red-400"
+              >
                 Logout
               </button>
             </>

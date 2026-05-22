@@ -13,7 +13,7 @@ function AdminDashboardPage() {
           Admin Dashboard
         </h1>
 
-        {/* ⭐ Admin Dashboard Cards */}
+        {/* Admin Dashboard Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
 
           {/* Appointments Card */}
@@ -28,7 +28,7 @@ function AdminDashboardPage() {
           <Link to="/admin/estimates">
             <div className="bg-white shadow rounded-lg p-4 md:p-6 hover:shadow-lg transition cursor-pointer">
               <h2 className="text-xl md:text-2xl font-bold mb-2">Estimates</h2>
-              <p>Review AI repair estimates</p>
+              <p>Manage AI repair estimates</p>
             </div>
           </Link>
 

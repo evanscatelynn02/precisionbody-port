@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import API from "../services/api";
+import { AuthContext } from "../context/AuthContext";
 
 function RegisterPage() {
+
+  const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const [loading, setLoading] = useState(false);
 
@@ -35,8 +40,9 @@ function RegisterPage() {
     try {
       const response = await API.post("/auth/register", formData);
 
-      alert("Registration successful");
-      console.log(response.data);
+      login(response.data);
+
+      navigate("/dashboard");
 
     } catch (error) {
       console.error(error);
@@ -107,9 +113,7 @@ function RegisterPage() {
       </div>
 
       <footer className="bg-black text-white text-center py-6 mt-20">
-        <p>
-            PrecisionBody Port © 2026
-        </p>
+        <p>PrecisionBody Port © 2026</p>
       </footer>
       
     </div>

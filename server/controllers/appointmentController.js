@@ -23,6 +23,7 @@ const createAppointment = async (req, res) => {
       estimateId,
       appointmentDate,
       notes,
+      repairStatus: "Pending",
     });
 
     res.status(201).json(appointment);
@@ -38,7 +39,10 @@ const getUserAppointments = async (req, res) => {
   try {
     const appointments = await Appointment.find({
   userId: req.user._id,
-});
+})
+.populate("vehicleId")
+.populate("estimateId")
+.sort({ createdAt: -1 });
 
     res.json(appointments);
   } catch (error) {

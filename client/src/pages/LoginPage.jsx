@@ -38,8 +38,14 @@ function LoginPage() {
       const response = await API.post("/auth/login", formData);
 
       login(response.data);
-      alert("Login successful");
-      navigate("/dashboard");
+
+      const role = response.data.user?.role || response.data.role;
+
+      if (role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/dashboard");
+      };
 
     } catch (error) {
       console.error(error);
