@@ -1,0 +1,24 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,jsx,ts,tsx}",
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        heading: ['Bebas Neue', 'sans-serif'],
+        body: ['Roboto', 'sans-serif'],
+      },
+      colors: {
+        steel: '#C4C4C4',
+        gunmetal: '#2A2D34',
+        asphalt: '#1F2124',
+        fire: '#D7263D',
+        electric: '#007BFF',
+        hazard: '#F5C518',
+      },
+    },
+  },
+  plugins: [],
+}

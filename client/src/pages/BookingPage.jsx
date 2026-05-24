@@ -101,9 +101,9 @@ function BookingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-300 flex flex-col justify-between">
-      <div className="max-w-2xl mx-auto">
+    <div className="min-h-screen flex flex-col justify-between bg-gray-300 p-4 md:p-6">
 
+      <div className="max-w-2xl mx-auto w-full">
         <h1 className="text-3xl md:text-4xl font-bold mb-6">
           Book Appointment
         </h1>
@@ -120,7 +120,6 @@ function BookingPage() {
             className="w-full border p-3 rounded"
           >
             <option value="">Select Vehicle</option>
-
             {vehicles.map((v) => (
               <option key={v._id} value={v._id}>
                 {v.year} {v.make} {v.model}
@@ -135,7 +134,6 @@ function BookingPage() {
             className="w-full border p-3 rounded"
           >
             <option value="">Select Estimate (optional)</option>
-
             {estimates.map((e) => (
               <option key={e._id} value={e._id}>
                 {e.damageDescription} - ${e.aiEstimateAmount}
@@ -170,12 +168,12 @@ function BookingPage() {
           </button>
 
         </form>
-
       </div>
 
-      <footer className="bg-black text-white text-center py-6 mt-20">
+      <footer className="bg-black text-white text-center py-6">
         <p>PrecisionBody Port © 2026</p>
       </footer>
+
     </div>
   );
 }

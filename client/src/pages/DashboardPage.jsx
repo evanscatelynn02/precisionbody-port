@@ -6,7 +6,6 @@ import API from "../services/api";
 function DashboardPage() {
   const { user } = useContext(AuthContext);
 
-  // ADMIN REDIRECT
   if (user?.role === "admin") {
     return <Navigate to="/admin" replace />;
   }
@@ -19,16 +18,11 @@ function DashboardPage() {
 
     const fetchAppointments = async () => {
       try {
-        console.log("Fetching appointments. . .");
-        console.log("TOKEN:", user?.token);
-        console.log("USER:", user);
-
         const response = await API.get("/appointments", {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
         });
-
         setAppointments(response.data);
       } catch (error) {
         console.error(error);
@@ -42,7 +36,6 @@ function DashboardPage() {
             Authorization: `Bearer ${user.token}`,
           },
         });
-
         setEstimates(response.data);
       } catch (error) {
         console.error(error);
@@ -54,52 +47,60 @@ function DashboardPage() {
   }, [user?.token]);
 
   return (
-    <div className="min-h-screen bg-gray-300 flex flex-col justify-between">
-      <div className="max-w-6xl mx-auto w-full">
+    <div className="min-h-screen bg-asphalt flex flex-col justify-between">
+      <div className="max-w-6xl mx-auto w-full p-4 md:p-6">
 
-        <h1 className="text-3xl md:text-4xl font-bold mb-6">Dashboard</h1>
+        <h1 className="font-heading text-3xl md:text-4xl tracking-wide uppercase text-black mb-4">
+          Dashboard
+        </h1>
 
-        <div className="bg-white p-4 md:p-6 rounded-lg shadow">
-          <p className="text-lg">
-            Welcome, {user?.firstName}
+        <div className="bg-gray-300 p-4 md:p-6 rounded-lg shadow border border-steel">
+          <p className="font-body text-lg text-gunmetal">
+            Welcome, <span className="font-semibold">{user?.firstName}</span>
           </p>
 
-          <p className="text-gray-600 mt-2">
+          <p className="font-body text-gray-700 mt-2">
             Manage estimates, bookings, vehicles, and repair updates here.
           </p>
 
-          {/* Dashboard Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mt-8">
 
             {/* Estimates Card */}
             <Link to="/estimates">
-              <div className="bg-white shadow rounded-lg p-4 md:p-6 hover:shadow-lg transition cursor-pointer">
-                <h2 className="text-lg md:text-xl font-bold">Estimates</h2>
-                <p className="text-gray-500 mt-2">View AI repair estimates</p>
+              <div className="bg-gray-100 shadow rounded-md p-4 md:p-6 hover:shadow-lg transition cursor-pointer border border-steel">
+                <h2 className="font-heading text-lg md:text-xl tracking-wide uppercase text-gunmetal border-b border-steel pb-2 mb-3">
+                  Estimates
+                </h2>
+                <p className="font-body text-gray-600">
+                  View AI repair estimates
+                </p>
 
                 <div className="mt-4">
                   {estimates.length === 0 ? (
-                    <p>No estimates found.</p>
+                    <p className="font-body text-gray-500">No estimates found.</p>
                   ) : (
-                    estimates.map((estimate) => (
+                    estimates.slice(0, 3).map((estimate) => (
                       <div
                         key={estimate._id}
-                        className="border rounded p-3 mb-3"
+                        className="border border-steel rounded p-3 mb-3 bg-white"
                       >
-                        <p className="font-semibold">
+                        <p className="font-body font-semibold">
                           {estimate.damageDescription}
                         </p>
-
-                        <p>Estimated Cost: ${estimate.aiEstimateAmount}</p>
-
-                        <p>
-                          Status:{" "}
-                          <span className="text-green-600">
-                            {estimate.status}
-                          </span>
+                        <p className="font-body text-sm">
+                          Estimated Cost: ${estimate.aiEstimateAmount}
+                        </p>
+                        <p className="font-body text-sm">
+                          Status: {estimate.status}
                         </p>
                       </div>
                     ))
+                  )}
+
+                  {estimates.length > 3 && (
+                    <p className="font-body text-electric mt-2">
+                      View All →
+                    </p>
                   )}
                 </div>
               </div>
@@ -107,9 +108,11 @@ function DashboardPage() {
 
             {/* Appointments Card */}
             <Link to="/appointments">
-              <div className="bg-white shadow rounded-lg p-4 md:p-6 hover:shadow-lg transition cursor-pointer">
-                <h2 className="text-lg md:text-xl font-bold">Appointments</h2>
-                <p className="text-gray-500 mt-2">
+              <div className="bg-gray-100 shadow rounded-md p-4 md:p-6 hover:shadow-lg transition cursor-pointer border border-steel">
+                <h2 className="font-heading text-lg md:text-xl tracking-wide uppercase text-gunmetal border-b border-steel pb-2 mb-3">
+                  Appointments
+                </h2>
+                <p className="font-body text-gray-600">
                   Manage your scheduled repair appointments
                 </p>
               </div>
@@ -117,30 +120,32 @@ function DashboardPage() {
 
             {/* Repair Status Card */}
             <Link to="/repair-status">
-              <div className="bg-white shadow rounded-lg p-4 md:p-6 hover:shadow-lg transition cursor-pointer">
-                <h2 className="text-lg md:text-xl font-bold">Repair Status</h2>
-                <p className="text-gray-500 mt-2">
+              <div className="bg-gray-50 shadow rounded-md p-4 md:p-6 hover:shadow-lg transition cursor-pointer border border-steel">
+                <h2 className="font-heading text-lg md:text-xl tracking-wide uppercase text-gunmetal border-b border-steel pb-2 mb-3">
+                  Repair Status
+                </h2>
+                <p className="font-body text-gray-600">
                   Track your vehicle’s repair progress
                 </p>
 
                 <div className="mt-4">
                   {appointments.length === 0 ? (
-                    <p>No appointments found.</p>
+                    <p className="font-body text-gray-500">No appointments found.</p>
                   ) : (
                     appointments.map((appointment) => (
                       <div
                         key={appointment._id}
-                        className="border rounded p-4 mb-4"
+                        className="border border-steel rounded p-4 mb-4 bg-white"
                       >
-                        <p className="font-semibold">
+                        <p className="font-body font-semibold">
                           {appointment.vehicleId?.make}{" "}
                           {appointment.vehicleId?.model}
                         </p>
 
-                        <p>
+                        <p className="font-body text-sm">
                           Status:{" "}
-                          <span className="text-blue-600">
-                            {appointment.repairStatus}
+                          <span className="text-electric font-semibold">
+                            {appointment.status}
                           </span>
                         </p>
                       </div>
@@ -152,9 +157,11 @@ function DashboardPage() {
 
             {/* My Garage Card */}
             <Link to="/vehicles">
-              <div className="bg-white shadow rounded-lg p-4 md:p-6 hover:shadow-lg transition cursor-pointer">
-                <h2 className="text-lg md:text-xl font-bold">My Garage</h2>
-                <p className="text-gray-500 mt-2">
+              <div className="bg-gray-100 shadow rounded-md p-4 md:p-6 hover:shadow-lg transition cursor-pointer border border-steel">
+                <h2 className="font-heading text-lg md:text-xl tracking-wide uppercase text-gunmetal border-b border-steel pb-2 mb-3">
+                  My Garage
+                </h2>
+                <p className="font-body text-gray-600">
                   Manage your saved vehicles
                 </p>
               </div>
@@ -165,8 +172,8 @@ function DashboardPage() {
 
       </div>
 
-      <footer className="bg-black text-white text-center py-6 mt-20">
-        <p>PrecisionBody Port © 2026</p>
+      <footer className="bg-black text-white text-center py-6 mt-10">
+        <p className="font-body">PrecisionBody Port © 2026</p>
       </footer>
     </div>
   );

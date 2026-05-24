@@ -6,58 +6,60 @@ function AdminDashboardPage() {
   const { user } = useContext(AuthContext);
 
   return (
-    <div className="min-h-screen bg-gray-300 flex flex-col justify-between">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-asphalt flex flex-col justify-between">
+      <div className="max-w-7xl mx-auto p-4 md:p-6 w-full">
 
-        <h1 className="text-3xl md:text-4xl font-bold mb-8">
+        <h1 className="font-heading text-3xl md:text-4xl tracking-wide uppercase text-black mb-6">
           Admin Dashboard
         </h1>
 
-        {/* Admin Dashboard Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
 
-          {/* Appointments Card */}
           <Link to="/admin/appointments">
-            <div className="bg-white shadow rounded-lg p-4 md:p-6 hover:shadow-lg transition cursor-pointer">
-              <h2 className="text-xl md:text-2xl font-bold mb-2">Appointments</h2>
-              <p>Manage incoming bookings</p>
+            <div className="bg-white shadow rounded-md p-4 md:p-6 hover:shadow-lg transition cursor-pointer border border-steel">
+              <h2 className="font-heading text-xl md:text-2xl tracking-wide uppercase text-gunmetal border-b border-steel pb-2 mb-2">
+                Appointments
+              </h2>
+              <p className="font-body text-gray-600">Manage incoming bookings</p>
             </div>
           </Link>
 
-          {/* Estimates Card */}
           <Link to="/admin/estimates">
-            <div className="bg-white shadow rounded-lg p-4 md:p-6 hover:shadow-lg transition cursor-pointer">
-              <h2 className="text-xl md:text-2xl font-bold mb-2">Estimates</h2>
-              <p>Manage AI repair estimates</p>
+            <div className="bg-white shadow rounded-md p-4 md:p-6 hover:shadow-lg transition cursor-pointer border border-steel">
+              <h2 className="font-heading text-xl md:text-2xl tracking-wide uppercase text-gunmetal border-b border-steel pb-2 mb-2">
+                Estimates
+              </h2>
+              <p className="font-body text-gray-600">Manage AI repair estimates</p>
             </div>
           </Link>
 
-          {/* Customers Card */}
           <Link to="/admin/customers">
-            <div className="bg-white shadow rounded-lg p-4 md:p-6 hover:shadow-lg transition cursor-pointer">
-              <h2 className="text-xl md:text-2xl font-bold mb-2">Customers</h2>
-              <p>Manage registered users</p>
+            <div className="bg-white shadow rounded-md p-4 md:p-6 hover:shadow-lg transition cursor-pointer border border-steel">
+              <h2 className="font-heading text-xl md:text-2xl tracking-wide uppercase text-gunmetal border-b border-steel pb-2 mb-2">
+                Customers
+              </h2>
+              <p className="font-body text-gray-600">Manage registered users</p>
             </div>
           </Link>
 
         </div>
 
-        {/* Logged In Admin Info */}
-        <div className="mt-10 bg-white shadow rounded-lg p-4 md:p-6">
-          <h2 className="text-xl md:text-2xl font-bold mb-4">Logged In Admin</h2>
+        <div className="mt-10 bg-white shadow rounded-md p-4 md:p-6 border border-steel">
+          <h2 className="font-heading text-xl md:text-2xl tracking-wide uppercase text-gunmetal border-b border-steel pb-2 mb-4">
+            Logged In Admin
+          </h2>
 
-          <p>{user?.firstName}</p>
-          <p className="text-gray-500">
+          <p className="font-body text-gunmetal">{user?.firstName}</p>
+          <p className="font-body text-gray-500">
             Role: {user?.role}
           </p>
         </div>
 
       </div>
 
-      <footer className="bg-black text-white text-center py-6 mt-20">
-        <p>PrecisionBody Port © 2026</p>
+      <footer className="bg-black text-white text-center py-6 mt-10">
+        <p className="font-body">PrecisionBody Port © 2026</p>
       </footer>
-
     </div>
   );
 }

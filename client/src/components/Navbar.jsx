@@ -4,7 +4,6 @@ import { AuthContext } from "../context/AuthContext";
 
 function Navbar() {
   const { user, logout } = useContext(AuthContext);
-
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -13,49 +12,97 @@ function Navbar() {
   };
 
   return (
-    <nav className="bg-black text-white px-8 p-4">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
-       
-        <h1 className="text-2xl font-bold">
+    <nav className="bg-black text-white shadow-md border-b border-steel">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex justify-between items-center">
+
+        {/* BRAND */}
+        <Link to="/" className="font-heading text-3xl tracking-wide uppercase hover:text-gray-500 transition">
           PrecisionBody Port
-        </h1>
+        </Link>
 
-        <div className="flex gap-6">
-          <Link to="/">Home</Link>
+        {/* NAV LINKS */}
+        <div className="flex items-center gap-6 font-body text-lg">
 
+          {/* Always show */}
+          <Link
+            to="/"
+            className="hover:text-gray-500 transition"
+          >
+            Home
+          </Link>
+
+          <Link to="/services" className="hover:text-gray-500 transition">
+            Services
+          </Link>
+
+
+          {/* Public Links */}
           {!user && (
             <>
-              <Link to="/login">Login</Link>
-              <Link to="/register">Register</Link>
+              <Link
+                to="/login"
+                className="hover:text-gray-500 transition"
+              >
+                Login
+              </Link>
+
+              <Link
+                to="/register"
+                className="hover:text-gray-500 transition"
+              >
+                Register
+              </Link>
             </>
           )}
 
+          {/* Authenticated Links */}
           {user && (
             <>
-              {/* Show Dashboard for users, Admin Dashboard for admins */}
-              {user?.role === "admin" ? (
-                <Link to="/admin">Admin Dashboard</Link>
+              {/* Dashboard (User or Admin) */}
+              {user.role === "admin" ? (
+                <Link
+                  to="/admin"
+                  className="hover:text-gray-500 transition"
+                >
+                  Admin Dashboard
+                </Link>
               ) : (
-                <Link to="/dashboard">Dashboard</Link>
+                <Link
+                  to="/dashboard"
+                  className="hover:text-gray-500 transition"
+                >
+                  Dashboard
+                </Link>
               )}
 
               {/* User‑only links */}
-              {user?.role !== "admin" && (
+              {user.role !== "admin" && (
                 <>
-                  <Link to="/booking">Booking</Link>
-                  <Link to="/estimate">Estimate</Link>
+                  <Link
+                    to="/booking"
+                    className="hover:text-gray-500 transition"
+                  >
+                    Booking
+                  </Link>
+
+                  <Link
+                    to="/estimate"
+                    className="hover:text-gray-500 transition"
+                  >
+                    Estimate
+                  </Link>
                 </>
               )}
 
+              {/* Logout */}
               <button
                 onClick={handleLogout}
-                className="text-red-400"
+                className="text-red-600 font-semibold hover:text-red-900 transition"
               >
                 Logout
               </button>
             </>
           )}
-
         </div>
       </div>
     </nav>

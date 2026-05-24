@@ -6,8 +6,11 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
+import ServicesPage from "./pages/ServicesPage";
 import BookingPage from "./pages/BookingPage";
 import EstimatePage from "./pages/EstimatePage";
+import EstimatesListPage from "./pages/EstimatesListPage";
+import EstimateDetailsPage from "./pages/EstimateDetailsPage";
 import VehiclesPage from "./pages/VehiclesPage";
 import AppointmentsPage from "./pages/AppointmentsPage";
 import RepairStatusPage from "./pages/RepairStatusPage";
@@ -44,9 +47,15 @@ function App() {
           : <DashboardPage />
         } />
 
+        <Route path="/services" element={<ServicesPage />} />
+
         <Route path="/booking" element={<BookingPage />} />
 
-        <Route path="/estimate" element={<EstimatePage />} />
+        <Route path="/estimate" element={user ? <EstimatePage /> : <Navigate to="/login" replace />} />
+
+        <Route path="/estimates" element={<EstimatesListPage />} />
+
+        <Route path="/estimates/:id" element={<EstimateDetailsPage />} />
 
         <Route path="/vehicles" element={<VehiclesPage />} />
 
