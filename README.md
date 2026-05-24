@@ -84,6 +84,7 @@ The AI returns:
 - email  
 - password  
 - role (user/admin)
+- phoneNumber
 
 ### **Vehicle**
 - make  
